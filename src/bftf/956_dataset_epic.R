@@ -24,7 +24,7 @@ palancas  <- list()  #variable con las palancas para activar/desactivar
 
 palancas$version  <- "v956"   #Muy importante, ir cambiando la version
 
-palancas$variablesdrift  <- c("ccajas_transacciones", "Master_mpagominimo",
+palancas$variablesdrift  <- c("ccajas_transacciones",
                               "internet", "matm_other", "tmobile_app","cmobile_app_trx","Master_Finiciomora",
                               "Master_fultimo_cierre","Visa_Finiciomora",
                               "cforex_buy","Visa_fultimo_cierre")   #aqui van las columnas que se quieren eliminar
