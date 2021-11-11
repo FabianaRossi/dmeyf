@@ -22,7 +22,7 @@ setwd( directory.root )
 
 palancas  <- list()  #variable con las palancas para activar/desactivar
 
-palancas$version  <- "v954"   #Muy importante, ir cambiando la version
+palancas$version  <- "v955"   #Muy importante, ir cambiando la version
 
 palancas$variablesdrift  <- c("ccajas_transacciones", "Master_mpagominimo",
                               "internet", "matm_other", "tmobile_app","cmobile_app_trx","Master_Finiciomora",
