@@ -358,12 +358,12 @@ AgregarVariables  <- function( dataset )
   dataset[ , Visa_mlimitecompra:= rank(Visa_mlimitecompra,ties.method="first")] 
   dataset[ , Visa_madelantopesos:= rank(Visa_madelantopesos,ties.method="first")] 
   dataset[ , Visa_madelantodolares:= rank(Visa_madelantodolares,ties.method="first")] 
-  dataset[ , Visa_mpagado:= rank(Master_mpagominimo,ties.method="first")] 
-  dataset[ , Visa_mpagospesos:= rank(Visa_mfinanciacion_limite,ties.method="first")] 
+  dataset[ , Visa_mpagado:= rank(Visa_mpagado,ties.method="first")] 
+  dataset[ , Visa_mpagospesos:= rank(Visa_mpagospesos,ties.method="first")] 
   
-  dataset[ , Visa_mpagosdolares:= rank(Visa_msaldototal,ties.method="first")] 
-  dataset[ , Visa_mconsumototal:= rank(Visa_msaldopesos,ties.method="first")] 
-  dataset[ , Visa_mpagominimo:= rank(Visa_msaldodolares,ties.method="first")] 
+  dataset[ , Visa_mpagosdolares:= rank(Visa_mpagosdolares,ties.method="first")] 
+  dataset[ , Visa_mconsumototal:= rank(Visa_mconsumototal,ties.method="first")] 
+  dataset[ , Visa_mpagominimo:= rank(Visa_mpagominimo,ties.method="first")] 
   
 
   dataset[ , mv_edad:= ctrx_quarter / cliente_edad ]
