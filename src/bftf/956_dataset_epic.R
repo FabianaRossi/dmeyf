@@ -311,7 +311,7 @@ AgregarVariables  <- function( dataset )
   dataset[ , mpayroll:= rank(mpayroll,ties.method="first")] 
   dataset[ , mpayroll2:= rank(mpayroll2,ties.method="first")] 
   dataset[ , mcuenta_debitos_automaticos:= rank(mcuenta_debitos_automaticos,ties.method="first")] 
-  dataset[ , mtarjeta_visa_debitos_automaticos:= rank(mtarjeta_visa_debitos_automaticos,ties.method="first")] 
+  #dataset[ , mtarjeta_visa_debitos_automaticos:= rank(mtarjeta_visa_debitos_automaticos,ties.method="first")] 
   dataset[ , mttarjeta_master_debitos_automaticos:= rank(mttarjeta_master_debitos_automaticos,ties.method="first")] 
   dataset[ , mpagodeservicios:= rank(mpagodeservicios,ties.method="first")] 
   dataset[ , mpagomiscuentas:= rank(mpagomiscuentas,ties.method="first")] 

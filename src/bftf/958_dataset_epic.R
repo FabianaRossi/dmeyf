@@ -22,7 +22,7 @@ setwd( directory.root )
 
 palancas  <- list()  #variable con las palancas para activar/desactivar
 
-palancas$version  <- "v957"   #Muy importante, ir cambiando la version
+palancas$version  <- "v958"   #Muy importante, ir cambiando la version
 
 palancas$variablesdrift  <- c("ccajas_transacciones", "Master_mpagominimo",
                               "internet", "matm_other", "tmobile_app","cmobile_app_trx","Master_Finiciomora",
@@ -282,90 +282,6 @@ AgregarVariables  <- function( dataset )
 
   #Aqui debe usted agregar sus propias nuevas variables
   
- 
-  dataset[ , mrentabilidad:= rank(mrentabilidad,ties.method="first")] 
-  dataset[ , mrentabilidad_annual:= rank(mrentabilidad_annual,ties.method="first")] 
-  dataset[ , mcomisiones:= rank(mcomisiones,ties.method="first")] 
-  dataset[ , mactivos_margen:= rank(mactivos_margen,ties.method="first")] 
-  dataset[ , mpasivos_margen:= rank(mpasivos_margen,ties.method="first")] 
-  dataset[ , mcuenta_corriente_adicional:= rank(mcuenta_corriente_adicional,ties.method="first")] 
-  dataset[ , mcuenta_corriente:= rank(mcuenta_corriente,ties.method="first")] 
-  dataset[ , mcaja_ahorro:= rank(mcaja_ahorro,ties.method="first")] 
-  dataset[ , mcaja_ahorro_adicional:= rank(mcaja_ahorro_adicional,ties.method="first")] 
-  dataset[ , mcaja_ahorro_dolares:= rank(mcaja_ahorro_dolares,ties.method="first")] 
-  
-  dataset[ , mdescubierto_preacordado:= rank(mdescubierto_preacordado,ties.method="first")] 
-  dataset[ , mcuentas_saldo:= rank(mcuentas_saldo,ties.method="first")] 
-  dataset[ , mautoservicio:= rank(mautoservicio,ties.method="first")] 
-  dataset[ , mtarjeta_visa_consumo:= rank(mtarjeta_visa_consumo,ties.method="first")] 
-  dataset[ , mtarjeta_master_consumo:= rank(mtarjeta_master_consumo,ties.method="first")] 
-  dataset[ , mprestamos_personales:= rank(mprestamos_personales,ties.method="first")] 
-  dataset[ , mprestamos_prendarios:= rank(mprestamos_prendarios,ties.method="first")] 
-  dataset[ , mprestamos_hipotecarios:= rank(mprestamos_hipotecarios,ties.method="first")] 
-  dataset[ , mplazo_fijo_dolares:= rank(mplazo_fijo_dolares,ties.method="first")] 
-  dataset[ , mplazo_fijo_pesos:= rank(mplazo_fijo_pesos,ties.method="first")] 
-  
-  dataset[ , minversion1_pesos:= rank(minversion1_pesos,ties.method="first")] 
-  dataset[ , minversion1_dolares:= rank(minversion1_dolares,ties.method="first")] 
-  dataset[ , minversion2:= rank(minversion2,ties.method="first")] 
-  dataset[ , mpayroll:= rank(mpayroll,ties.method="first")] 
-  dataset[ , mpayroll2:= rank(mpayroll2,ties.method="first")] 
-  dataset[ , mcuenta_debitos_automaticos:= rank(mcuenta_debitos_automaticos,ties.method="first")] 
-  #dataset[ , mtarjeta_visa_debitos_automaticos:= rank(mtarjeta_visa_debitos_automaticos,ties.method="first")] 
-  dataset[ , mttarjeta_master_debitos_automaticos:= rank(mttarjeta_master_debitos_automaticos,ties.method="first")] 
-  dataset[ , mpagodeservicios:= rank(mpagodeservicios,ties.method="first")] 
-  dataset[ , mpagomiscuentas:= rank(mpagomiscuentas,ties.method="first")] 
-  
-  dataset[ , mcajeros_propios_descuentos:= rank(mcajeros_propios_descuentos,ties.method="first")] 
-  dataset[ , mtarjeta_visa_descuentos:= rank(mtarjeta_visa_descuentos,ties.method="first")] 
-  dataset[ , mtarjeta_master_descuentos:= rank(mtarjeta_master_descuentos,ties.method="first")] 
-  dataset[ , mcomisiones_mantenimiento:= rank(mcomisiones_mantenimiento,ties.method="first")] 
-  dataset[ , mcomisiones_otras:= rank(mcomisiones_otras,ties.method="first")] 
-  dataset[ , mforex_buy:= rank(mforex_buy,ties.method="first")] 
-  dataset[ , mforex_sell:= rank(mforex_sell,ties.method="first")] 
-  dataset[ , mtransferencias_recibidas:= rank(mtransferencias_recibidas,ties.method="first")] 
-  dataset[ , mtransferencias_emitidas:= rank(mtransferencias_emitidas,ties.method="first")] 
-  dataset[ , mextraccion_autoservicio:= rank(mextraccion_autoservicio,ties.method="first")] 
-  
-  dataset[ , mcheques_depositados:= rank(mcheques_depositados,ties.method="first")] 
-  dataset[ , mcheques_emitidos:= rank(mcheques_emitidos,ties.method="first")] 
-  dataset[ , mcheques_depositados_rechazados:= rank(mcheques_depositados_rechazados,ties.method="first")] 
-  dataset[ , mcheques_emitidos_rechazados:= rank(mcheques_emitidos_rechazados,ties.method="first")] 
-  dataset[ , matm:= rank(matm,ties.method="first")] 
-  dataset[ , matm_other:= rank(matm_other,ties.method="first")] 
-  dataset[ , Master_mfinanciacion_limite:= rank(Master_mfinanciacion_limite,ties.method="first")] 
-  dataset[ , Master_msaldototal:= rank(Master_msaldototal,ties.method="first")] 
-  dataset[ , Master_msaldopesos:= rank(Master_msaldopesos,ties.method="first")] 
-  dataset[ , Master_msaldodolares:= rank(Master_msaldodolares,ties.method="first")]
-  
-  dataset[ , Master_mconsumospesos:= rank(Master_mconsumospesos,ties.method="first")] 
-  dataset[ , Master_mconsumosdolares:= rank(Master_mconsumosdolares,ties.method="first")] 
-  dataset[ , Master_mlimitecompra:= rank(Master_mlimitecompra,ties.method="first")] 
-  dataset[ , Master_madelantopesos:= rank(Master_madelantopesos,ties.method="first")] 
-  dataset[ , Master_madelantodolares:= rank(Master_madelantodolares,ties.method="first")] 
-  dataset[ , Master_mpagado:= rank(Master_mpagado,ties.method="first")] 
-  dataset[ , Master_mpagospesos:= rank(Master_mpagospesos,ties.method="first")] 
-  dataset[ , Master_mpagosdolares:= rank(Master_mpagosdolares,ties.method="first")] 
-  dataset[ , Master_mconsumototal:= rank(Master_mconsumototal,ties.method="first")] 
-  dataset[ , Master_mpagominimo:= rank(Master_mpagominimo,ties.method="first")] 
-  dataset[ , Visa_mfinanciacion_limite:= rank(Visa_mfinanciacion_limite,ties.method="first")] 
-  
-  dataset[ , Visa_msaldototal:= rank(Visa_msaldototal,ties.method="first")] 
-  dataset[ , Visa_msaldopesos:= rank(Visa_msaldopesos,ties.method="first")] 
-  dataset[ , Visa_msaldodolares:= rank(Visa_msaldodolares,ties.method="first")] 
-  dataset[ , Visa_mconsumospesos:= rank(Visa_mconsumospesos,ties.method="first")] 
-  dataset[ , Visa_mconsumosdolares:= rank(Visa_mconsumosdolares,ties.method="first")] 
-  dataset[ , Visa_mlimitecompra:= rank(Visa_mlimitecompra,ties.method="first")] 
-  dataset[ , Visa_madelantopesos:= rank(Visa_madelantopesos,ties.method="first")] 
-  dataset[ , Visa_madelantodolares:= rank(Visa_madelantodolares,ties.method="first")] 
-  dataset[ , Visa_mpagado:= rank(Master_mpagominimo,ties.method="first")] 
-  dataset[ , Visa_mpagospesos:= rank(Visa_mfinanciacion_limite,ties.method="first")] 
-  
-  dataset[ , Visa_mpagosdolares:= rank(Visa_msaldototal,ties.method="first")] 
-  dataset[ , Visa_mconsumototal:= rank(Visa_msaldopesos,ties.method="first")] 
-  dataset[ , Visa_mpagominimo:= rank(Visa_msaldodolares,ties.method="first")] 
-  
-
   dataset[ , mv_edad:= ctrx_quarter / cliente_edad ]
   dataset[ , mcc_visa:= mcuenta_corriente / mtarjeta_visa_consumo ]
   dataset[ , cp_mov:= cproductos / ctrx_quarter ]
@@ -377,6 +293,7 @@ AgregarVariables  <- function( dataset )
   dataset[ , rent_mant:= mrentabilidad_annual / mcomisiones_mantenimiento ]
   dataset[ , pr_mant:= mpayroll / mcomisiones_mantenimiento ]
   dataset[ , edad_visa:= cliente_edad / mtarjeta_visa_consumo ]
+
   #valvula de seguridad para evitar valores infinitos
   #paso los infinitos a NULOS
   infinitos      <- lapply(names(dataset),function(.name) dataset[ , sum(is.infinite(get(.name)))])
