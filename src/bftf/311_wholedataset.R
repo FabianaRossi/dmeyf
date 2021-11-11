@@ -17,7 +17,7 @@ for( campo in  campos_buenos )
 {
   cat( campo, "  " )
   
-  interesante <- dataset_prueba[ , get(campo) ]
-  boxplot(interesante ~ factor(dataset_prueba$foto_mes ))
+  interesante <- dataset[ , get(campo) ]
+  boxplot(interesante ~ factor(dataset$foto_mes ))
 }
 dev.off()
