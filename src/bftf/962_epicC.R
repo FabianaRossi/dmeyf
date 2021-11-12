@@ -43,7 +43,7 @@ setwd( directory.root )
 
 kexperimento  <- NA   #NA si se corre la primera vez, un valor concreto si es para continuar procesando
 
-kscript         <- "962_epic_2"
+kscript         <- "962_epicA"
 
 karch_dataset    <- "./datasets/dataset_epic_v952.csv.gz"
 
@@ -63,22 +63,21 @@ kgen_mes_hasta    <- 202011   #La generacion final para Kaggle, sin undersamplin
 kgen_mes_desde    <- 201901
 
 
-kBO_iter    <-  150   #cantidad de iteraciones de la Optimizacion Bayesiana
+kBO_iter    <-  100   #cantidad de iteraciones de la Optimizacion Bayesiana
 
 #Aqui se cargan los hiperparametros
 hs <- makeParamSet( 
-         makeNumericParam("learning_rate",    lower=    0.01 , upper=    0.1),
+         makeNumericParam("learning_rate",    lower=    0.02 , upper=    0.1),
          makeNumericParam("feature_fraction", lower=    0.1  , upper=    1.0),
          makeIntegerParam("min_data_in_leaf", lower=  200L   , upper= 8000L),
          makeIntegerParam("num_leaves",       lower=  100L   , upper= 1024L),
          makeNumericParam("lambda_l1",    lower=    0.00 , upper=    100),      #por ahora, lo dejo fijo
-         makeNumericParam("lambda_l2",    lower=    0.00 , upper=    100), 
-         makeIntegerParam("max_bin", lower=  5L   , upper= 31L)#por ahora, lo dejo fijo
+         makeNumericParam("lambda_l2",    lower=    0.00 , upper=    100)
         )
 
 campos_malos  <- c()   #aqui se deben cargar todos los campos culpables del Data Drifting
 
-ksemilla_azar  <- 140987  #Aqui poner la propia semilla
+ksemilla_azar  <- 102191  #Aqui poner la propia semilla
 #------------------------------------------------------------------------------
 #Funcion que lleva el registro de los experimentos
 
@@ -153,7 +152,7 @@ HemiModelos  <- function( hparam )
 
   tb_modelitos[ dataset[ generacion_final==1 & fold==2], 
                 on=c("numero_de_cliente","foto_mes"),  
-                paste0( "E1", kexperimento,"_", GLOBAL_iteracion ) := i.prob  ]
+                paste0( "E", kexperimento,"_", GLOBAL_iteracion ) := i.prob  ]
 
 
   #AHORA SOBRE LA OTRA MITAD -----------------
@@ -177,7 +176,7 @@ HemiModelos  <- function( hparam )
 
   tb_modelitos[ dataset[ generacion_final==1 & fold==1], 
                 on= c("numero_de_cliente","foto_mes"),  
-                paste0( "E1", kexperimento,"_", GLOBAL_iteracion ) := i.prob  ]
+                paste0( "E", kexperimento,"_", GLOBAL_iteracion ) := i.prob  ]
 
   dataset[  , prob := NULL ]
 
@@ -210,7 +209,7 @@ FullModelo  <- function( hparam )
   dataset[ , prob := prediccion ]
   tb_modelitos[ dataset, 
                 on=c("numero_de_cliente","foto_mes"),  
-                paste0( "E1", kexperimento,"_", GLOBAL_iteracion ) := i.prob  ]
+                paste0( "E", kexperimento,"_", GLOBAL_iteracion ) := i.prob  ]
 
  #Fin primera pasada modelitos
 
@@ -299,6 +298,8 @@ EstimarGanancia_lightgbm  <- function( x )
                           seed= 999983,
                           max_depth=  -1,         # -1 significa no limitar,  por ahora lo dejo fijo
                           min_gain_to_split= 0.0, #por ahora, lo dejo fijo
+                          
+                          max_bin= 17,            #por ahora, lo dejo fijo
                           num_iterations= 9999,   #un numero muy grande, lo limita early_stopping_rounds
                           force_row_wise= TRUE    #para que los alumnos no se atemoricen con tantos warning
                         )
@@ -362,16 +363,16 @@ EstimarGanancia_lightgbm  <- function( x )
 if( is.na(kexperimento ) )   kexperimento <- get_experimento()  #creo el experimento
 
 #en estos archivos quedan los resultados
-dir.create( paste0( "./work/E1",  kexperimento, "/" ) )     #creo carpeta del experimento dentro de work
-dir.create( paste0( "./kaggle/E1",  kexperimento, "/" ) )   #creo carpeta del experimento dentro de kaggle
-dir.create( paste0( "./kaggle/E1",  kexperimento, "/meseta/" ) )   #creo carpeta del experimento dentro de kaggle
+dir.create( paste0( "./work/E",  kexperimento, "/" ) )     #creo carpeta del experimento dentro de work
+dir.create( paste0( "./kaggle/E",  kexperimento, "/" ) )   #creo carpeta del experimento dentro de kaggle
+dir.create( paste0( "./kaggle/E",  kexperimento, "/meseta/" ) )   #creo carpeta del experimento dentro de kaggle
 
-kbayesiana    <- paste0("./work/E1",  kexperimento, "/E1",  kexperimento, "_", kscript, ".RDATA" )
-klog          <- paste0("./work/E1",  kexperimento, "/E1",  kexperimento, "_", kscript, "_BOlog.txt" )
-kimp          <- paste0("./work/E1",  kexperimento, "/E1",  kexperimento, "_", kscript, "_" )
-kkaggle       <- paste0("./kaggle/E1",kexperimento, "/E1",  kexperimento, "_", kscript, "_" )
-kkagglemeseta <- paste0("./kaggle/E1",kexperimento, "/meseta/E1",  kexperimento, "_", kscript, "_" )
-kmodelitos    <- paste0("./modelitos/E1", kexperimento, "_modelitos.csv.gz" )
+kbayesiana    <- paste0("./work/E",  kexperimento, "/E",  kexperimento, "_", kscript, ".RDATA" )
+klog          <- paste0("./work/E",  kexperimento, "/E",  kexperimento, "_", kscript, "_BOlog.txt" )
+kimp          <- paste0("./work/E",  kexperimento, "/E",  kexperimento, "_", kscript, "_" )
+kkaggle       <- paste0("./kaggle/E",kexperimento, "/E",  kexperimento, "_", kscript, "_" )
+kkagglemeseta <- paste0("./kaggle/E",kexperimento, "/meseta/E",  kexperimento, "_", kscript, "_" )
+kmodelitos    <- paste0("./modelitos/E", kexperimento, "_modelitos.csv.gz" )
 
 
 

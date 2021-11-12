@@ -43,7 +43,7 @@ setwd( directory.root )
 
 kexperimento  <- NA   #NA si se corre la primera vez, un valor concreto si es para continuar procesando
 
-kscript         <- "962_epic_1"
+kscript         <- "962_epicA"
 
 karch_dataset    <- "./datasets/dataset_epic_v952.csv.gz"
 
@@ -63,22 +63,21 @@ kgen_mes_hasta    <- 202011   #La generacion final para Kaggle, sin undersamplin
 kgen_mes_desde    <- 201901
 
 
-kBO_iter    <-  150   #cantidad de iteraciones de la Optimizacion Bayesiana
+kBO_iter    <-  100   #cantidad de iteraciones de la Optimizacion Bayesiana
 
 #Aqui se cargan los hiperparametros
 hs <- makeParamSet( 
-         makeNumericParam("learning_rate",    lower=    0.01 , upper=    0.1),
+         makeNumericParam("learning_rate",    lower=    0.02 , upper=    0.1),
          makeNumericParam("feature_fraction", lower=    0.1  , upper=    1.0),
          makeIntegerParam("min_data_in_leaf", lower=  200L   , upper= 8000L),
          makeIntegerParam("num_leaves",       lower=  100L   , upper= 1024L),
          makeNumericParam("lambda_l1",    lower=    0.00 , upper=    100),      #por ahora, lo dejo fijo
-         makeNumericParam("lambda_l2",    lower=    0.00 , upper=    100), 
-         makeIntegerParam("max_bin", lower=  5L   , upper= 31L)#por ahora, lo dejo fijo
+         makeNumericParam("lambda_l2",    lower=    0.00 , upper=    100)
         )
 
 campos_malos  <- c()   #aqui se deben cargar todos los campos culpables del Data Drifting
 
-ksemilla_azar  <- 140987  #Aqui poner la propia semilla
+ksemilla_azar  <- 102191  #Aqui poner la propia semilla
 #------------------------------------------------------------------------------
 #Funcion que lleva el registro de los experimentos
 
@@ -290,20 +289,6 @@ EstimarGanancia_lightgbm  <- function( x )
 
   gc()
 
-  #dejo los datos en el formato que necesita LightGBM
-  #uso el weight como un truco ESPANTOSO para saber la clase real
-  dtrain  <- lgb.Dataset( data=    data.matrix(  dataset[ entrenamiento==1 , campos_buenos, with=FALSE]),
-                          label=   dataset[ entrenamiento==1, clase01],
-                          weight=  dataset[ entrenamiento==1, ifelse(clase_ternaria=="BAJA+2", 1.0000001, 1.0)] ,
-                          free_raw_data= TRUE
-                        )
-
-  dvalid  <- lgb.Dataset( data=    data.matrix(  dataset[validacion==1 , campos_buenos, with=FALSE]),
-                          label=   dataset[ validacion==1, clase01],
-                          weight=  dataset[ validacion==1, ifelse(clase_ternaria=="BAJA+2", 1.0000001, 1.0)] ,
-                          free_raw_data= TRUE
-                        )
-
   param_basicos  <- list( objective= "binary",
                           metric= "custom",
                           first_metric_only= TRUE,
@@ -313,6 +298,8 @@ EstimarGanancia_lightgbm  <- function( x )
                           seed= 999983,
                           max_depth=  -1,         # -1 significa no limitar,  por ahora lo dejo fijo
                           min_gain_to_split= 0.0, #por ahora, lo dejo fijo
+                          
+                          max_bin= 23,            #por ahora, lo dejo fijo
                           num_iterations= 9999,   #un numero muy grande, lo limita early_stopping_rounds
                           force_row_wise= TRUE    #para que los alumnos no se atemoricen con tantos warning
                         )
@@ -455,20 +442,19 @@ dataset[    foto_mes>= ktest_mes_desde &
 campos_buenos  <- setdiff( colnames(dataset), 
                            c("clase_ternaria","clase01", "generacion_final", "entrenamiento", "validacion", "test", "fold", campos_malos) )
 
-#COMENTO ESTA PARTE y la paso adentro de EstimarGanancia_lightgbm
 #dejo los datos en el formato que necesita LightGBM
 #uso el weight como un truco ESPANTOSO para saber la clase real
-#dtrain  <- lgb.Dataset( data=    data.matrix(  dataset[ entrenamiento==1 , campos_buenos, with=FALSE]),
-#                        label=   dataset[ entrenamiento==1, clase01],
-#                        weight=  dataset[ entrenamiento==1, ifelse(clase_ternaria=="BAJA+2", 1.0000001, 1.0)] ,
-#                        free_raw_data= TRUE
-#                      )
+dtrain  <- lgb.Dataset( data=    data.matrix(  dataset[ entrenamiento==1 , campos_buenos, with=FALSE]),
+                        label=   dataset[ entrenamiento==1, clase01],
+                        weight=  dataset[ entrenamiento==1, ifelse(clase_ternaria=="BAJA+2", 1.0000001, 1.0)] ,
+                        free_raw_data= TRUE
+                      )
 
-#dvalid  <- lgb.Dataset( data=    data.matrix(  dataset[validacion==1 , campos_buenos, with=FALSE]),
-#                        label=   dataset[ validacion==1, clase01],
-#                        weight=  dataset[ validacion==1, ifelse(clase_ternaria=="BAJA+2", 1.0000001, 1.0)] ,
-#                        free_raw_data= TRUE
-#                      )
+dvalid  <- lgb.Dataset( data=    data.matrix(  dataset[validacion==1 , campos_buenos, with=FALSE]),
+                        label=   dataset[ validacion==1, clase01],
+                        weight=  dataset[ validacion==1, ifelse(clase_ternaria=="BAJA+2", 1.0000001, 1.0)] ,
+                        free_raw_data= TRUE
+                      )
 
 
 #Aqui comienza la configuracion de la Bayesian Optimization
