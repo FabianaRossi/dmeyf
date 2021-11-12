@@ -43,7 +43,7 @@ setwd( directory.root )
 
 kexperimento  <- NA   #NA si se corre la primera vez, un valor concreto si es para continuar procesando
 
-kscript         <- "962_epic"
+kscript         <- "962_epic_1"
 
 karch_dataset    <- "./datasets/dataset_epic_v952.csv.gz"
 
@@ -67,12 +67,12 @@ kBO_iter    <-  150   #cantidad de iteraciones de la Optimizacion Bayesiana
 
 #Aqui se cargan los hiperparametros
 hs <- makeParamSet( 
-         makeNumericParam("learning_rate",    lower=    0.02 , upper=    0.1),
+         makeNumericParam("learning_rate",    lower=    0.01 , upper=    0.1),
          makeNumericParam("feature_fraction", lower=    0.1  , upper=    1.0),
          makeIntegerParam("min_data_in_leaf", lower=  200L   , upper= 8000L),
          makeIntegerParam("num_leaves",       lower=  100L   , upper= 1024L),
-         makeNumericParam("lambda_l1",    lower=    0.00 , upper=    0.2),      #por ahora, lo dejo fijo
-         makeNumericParam("lambda_l2",    lower=    0.00 , upper=    0.8), 
+         makeNumericParam("lambda_l1",    lower=    0.00 , upper=    100),      #por ahora, lo dejo fijo
+         makeNumericParam("lambda_l2",    lower=    0.00 , upper=    100), 
          makeIntegerParam("max_bin", lower=  5L   , upper= 31L)#por ahora, lo dejo fijo
         )
 
