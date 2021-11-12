@@ -362,9 +362,9 @@ EstimarGanancia_lightgbm  <- function( x )
 if( is.na(kexperimento ) )   kexperimento <- get_experimento()  #creo el experimento
 
 #en estos archivos quedan los resultados
-dir.create( paste0( "./work/E",  kexperimento, "/" ) )     #creo carpeta del experimento dentro de work
-dir.create( paste0( "./kaggle/E",  kexperimento, "/" ) )   #creo carpeta del experimento dentro de kaggle
-dir.create( paste0( "./kaggle/E",  kexperimento, "/meseta/" ) )   #creo carpeta del experimento dentro de kaggle
+dir.create( paste0( "./work/E1",  kexperimento, "/" ) )     #creo carpeta del experimento dentro de work
+dir.create( paste0( "./kaggle/E1",  kexperimento, "/" ) )   #creo carpeta del experimento dentro de kaggle
+dir.create( paste0( "./kaggle/E1",  kexperimento, "/meseta/" ) )   #creo carpeta del experimento dentro de kaggle
 
 kbayesiana    <- paste0("./work/E1",  kexperimento, "/E1",  kexperimento, "_", kscript, ".RDATA" )
 klog          <- paste0("./work/E1",  kexperimento, "/E1",  kexperimento, "_", kscript, "_BOlog.txt" )
