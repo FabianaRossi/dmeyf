@@ -18,7 +18,7 @@
 rm( list=ls() )  #remove all objects
 gc()             #garbage collection
 
-require("data.table")
+require("data.table") 
 require("rlist")
 require("yaml")
 
