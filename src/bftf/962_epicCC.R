@@ -27,7 +27,7 @@ require("lightgbm")
 #paquetes necesarios para la Bayesian Optimization
 require("DiceKriging")
 require("mlrMBO")
- 
+
 
 #para poder usarlo en la PC y en la nube sin tener que cambiar la ruta
 #cambiar aqui las rutas en su maquina
@@ -41,9 +41,9 @@ setwd( directory.root )
 
 
 
-kexperimento  <- NA #NA si se corre la primera vez, un valor concreto si es para continuar procesando
+kexperimento  <- NA   #NA si se corre la primera vez, un valor concreto si es para continuar procesando
 
-kscript         <- "971post"
+kscript         <- "962_epicCC"
 
 karch_dataset    <- "./datasets/dataset_epic_v952b.csv.gz"
 
@@ -55,7 +55,7 @@ ktest_mes_desde  <- 202011
 ktrain_subsampling  <- 0.1   #el undersampling que voy a hacer de los continua
 
 ktrain_mes_hasta    <- 202010  #Obviamente, solo puedo entrenar hasta 202011
-ktrain_mes_desde    <- 202003
+ktrain_mes_desde    <- 201901
 ktrain_meses_malos  <- c( 202006 )  #meses que quiero excluir del entrenamiento
 
 
@@ -63,7 +63,7 @@ kgen_mes_hasta    <- 202011   #La generacion final para Kaggle, sin undersamplin
 kgen_mes_desde    <- 201901
 
 
-kBO_iter    <-  150   #cantidad de iteraciones de la Optimizacion Bayesiana
+kBO_iter    <-  100   #cantidad de iteraciones de la Optimizacion Bayesiana
 
 #Aqui se cargan los hiperparametros
 hs <- makeParamSet( 
