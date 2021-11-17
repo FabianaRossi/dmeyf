@@ -24,7 +24,7 @@ palancas  <- list()  #variable con las palancas para activar/desactivar
 
 palancas$version  <- "vcualca"   #Muy importante, ir cambiando la version
 
-palancas$variablesdrift  <- setdiff( colnames(dataset), c('comisiones_otras','chomebanking_transacciones',
+palancas$variablesdrift  <- setdiff( cols_analiticas, c('comisiones_otras','chomebanking_transacciones',
                                'ctarjeta_visa_transacciones','ctransferencias_recibidas',
                                'ctrx_quarter','mcaja_ahorro','mcuentas_saldo','mpasivos_margen',
                                'mtarjeta_visa_consumo'))   #aqui van las columnas que se quieren eliminar
@@ -636,15 +636,16 @@ correr_todo  <- function( palancas )
 
   AgregarMes( dataset )  #agrego el mes del año
 
+  cols_analiticas  <- setdiff( colnames(dataset),  c("numero_de_cliente","foto_mes","mes","clase_ternaria") )
   
+  if( length(palancas$variablesdrift) > 0 )   DriftEliminar( dataset, palancas$variablesdrift )
 
   if( palancas$dummiesNA )  DummiesNA( dataset )  #esta linea debe ir ANTES de Corregir  !!
   if( palancas$corregir )  Corregir( dataset )  #esta linea debe ir DESPUES de  DummiesNA
   
-  if( length(palancas$variablesdrift) > 0 )   DriftEliminar( dataset, palancas$variablesdrift )
+ 
   if( palancas$nuevasvars )  AgregarVariables( dataset )
 
-  cols_analiticas  <- setdiff( colnames(dataset),  c("numero_de_cliente","foto_mes","mes","clase_ternaria") )
 
   if( palancas$lag1 )   Lags( dataset, cols_analiticas, 1, palancas$delta1 )
   if( palancas$lag2 )   Lags( dataset, cols_analiticas, 2, palancas$delta2 )
