@@ -674,7 +674,7 @@ correr_todo  <- function( palancas )
 
   AgregarMes( dataset )  #agrego el mes del año
 
-  cols_analiticas  <- setdiff( colnames(dataset),  c("numero_de_cliente","foto_mes","mes","clase_ternaria") )
+ 
   
   if( length(palancas$variablesdrift) > 0 )   DriftEliminar( dataset, palancas$variablesdrift )
 
@@ -683,7 +683,7 @@ correr_todo  <- function( palancas )
   
  
   if( palancas$nuevasvars )  AgregarVariables( dataset )
-
+  cols_analiticas  <- setdiff( colnames(dataset),  c("numero_de_cliente","foto_mes","mes","clase_ternaria") )
 
   if( palancas$lag1 )   Lags( dataset, cols_analiticas, 1, palancas$delta1 )
   if( palancas$lag2 )   Lags( dataset, cols_analiticas, 2, palancas$delta2 )
