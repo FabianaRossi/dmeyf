@@ -63,7 +63,7 @@ kgen_mes_hasta    <- 202011   #La generacion final para Kaggle, sin undersamplin
 kgen_mes_desde    <- 201901
 
 
-kBO_iter    <-  150   #cantidad de iteraciones de la Optimizacion Bayesiana
+kBO_iter    <-  250   #cantidad de iteraciones de la Optimizacion Bayesiana
 
 #Aqui se cargan los hiperparametros
 hs <- makeParamSet( 
@@ -77,7 +77,7 @@ hs <- makeParamSet(
 
 campos_malos  <- c()   #aqui se deben cargar todos los campos culpables del Data Drifting
 
-ksemilla_azar  <- 102191  #Aqui poner la propia semilla
+ksemilla_azar  <- 140987  #Aqui poner la propia semilla
 #------------------------------------------------------------------------------
 #Funcion que lleva el registro de los experimentos
 
