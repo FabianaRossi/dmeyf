@@ -518,10 +518,8 @@ Tendencia  <- function( dataset, cols )
 
 Rango  <- function( dataset, cols )
 {
-  sufijo  <- paste0( "_rango" )
-  
-  dataset[ , paste0( cols, sufijo) := frank(cols), 
-           by= .(numero_de_cliente, foto_mes),
+  dataset[ , paste0( cols, "_rango") := frank(cols), 
+           by= foto_mes,
            .SDcols= cols]
   
   ReportarCampos( dataset )

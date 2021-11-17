@@ -24,10 +24,10 @@ palancas  <- list()  #variable con las palancas para activar/desactivar
 
 palancas$version  <- "vcualca"   #Muy importante, ir cambiando la version
 
-palancas$variablesdrift  <- -c('comisiones_otras','chomebanking_transacciones',
+palancas$variablesdrift  <- setdiff( colnames(dataset), c('comisiones_otras','chomebanking_transacciones',
                                'ctarjeta_visa_transacciones','ctransferencias_recibidas',
                                'ctrx_quarter','mcaja_ahorro','mcuentas_saldo','mpasivos_margen',
-                               'mtarjeta_visa_consumo')   #aqui van las columnas que se quieren eliminar
+                               'mtarjeta_visa_consumo'))   #aqui van las columnas que se quieren eliminar
 
 palancas$corregir <-  TRUE    # TRUE o FALSE
 
