@@ -43,7 +43,7 @@ setwd( directory.root )
 
 kexperimento  <- NA #NA si se corre la primera vez, un valor concreto si es para continuar procesando
 
-kscript         <- "969"
+kscript         <- "970"
 
 karch_dataset    <- "./datasets/dataset_epic_v960.csv.gz"
 
