@@ -518,7 +518,7 @@ Tendencia  <- function( dataset, cols )
 
 Rango  <- function( dataset, cols )
 {
-  dataset[ , paste0( cols, "_rango") := frank(cols), 
+  dataset[ , paste0( cols, "_rango") := lapply( .SD, frankv, na.last="keep", ties.method="dense" ), 
            by= foto_mes,
            .SDcols= cols]
   
