@@ -372,7 +372,7 @@ klog          <- paste0("./work/E",  kexperimento, "/E",  kexperimento, "_", ksc
 kimp          <- paste0("./work/E",  kexperimento, "/E",  kexperimento, "_", kscript, "_" )
 kkaggle       <- paste0("./kaggle/E",kexperimento, "/E",  kexperimento, "_", kscript, "_" )
 kkagglemeseta <- paste0("./kaggle/E",kexperimento, "/meseta/E",  kexperimento, "_", kscript, "_" )
-kmodelitos    <- paste0("./modelitos_stacking/E", kexperimento, "_modelitos.csv.gz" )
+kmodelitos    <- paste0("./modelos_stacking/E", kexperimento, "_modelitos.csv.gz" )
 
 
 
