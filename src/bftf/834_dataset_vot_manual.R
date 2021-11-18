@@ -11,7 +11,7 @@ gc()             #garbage collection
 setwd("/Users/FR/Desktop/salidas de kaggle/lgbm")
 require("data.table")
 
-version  <- "v_manual1"  #cambiar cada vez, asi se tiene versionado del dataset
+version  <- "v_manual2"  #cambiar cada vez, asi se tiene versionado del dataset
 
 
 library(stringr)
