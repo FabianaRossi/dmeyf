@@ -524,7 +524,8 @@ Rango  <- function( dataset, cols )
   
   cols_rank <- colnames(dataset)[dataset[,grepl( "_rango" , names( dataset ) )]]
   dataset[, paste0( cols, "_nrango") := lapply(.SD, function(x){(x - min(x)) / (max(x) - min(x))}), .SDcols = cols_rank]
-  
+  dataset[  , c(cols_rank) := NULL ]
+   
   ReportarCampos( dataset )
 }
 
