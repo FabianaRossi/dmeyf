@@ -53,7 +53,7 @@ kexperimento  <- NA #NA si se corre la primera vez, un valor concreto si es para
 
 kscript       <- "1420_C"
 
-karchivo_dataset   <-  "./datasets/dataset_epicv954.csv.gz"
+karchivo_dataset   <-  "./datasets/dataset_epic_v954.csv.gz"
 
 kfecha_cutoff  <- 202001
 ktrain_desde   <- 202001
