@@ -10,18 +10,18 @@ require("primes")
 setwd("~/buckets/b1/")
 
 karch_dataset  <- "./datasets/semillerio_dataset_lag1.csv.gz"
-ksalida  <- "semillerio" 
+ksalida  <- "semillerio_1430G_E5092" 
 
 kcantidad_semillas  <- 200
 
 #ATENCION
 #aqui deben ir los mejores valores que salieron de la optimizacion bayesiana
 x  <- list()
-x$gleaf_size   <-  
-x$gnum_leaves  <-  
-x$learning_rate <-  
-x$feature_fraction <-  
-x$num_iterations  <- 
+x$gleaf_size   <-  50.42088418
+x$gnum_leaves  <-  0.08296953
+x$learning_rate <-  0.135797963
+x$feature_fraction <-0.403385177
+x$num_iterations  <- 439
 
 #------------------------------------------------------------------------------
 
