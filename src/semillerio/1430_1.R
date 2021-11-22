@@ -10,7 +10,7 @@ require("primes")
 setwd("~/buckets/b1/")
 
 karch_dataset  <- "./datasets/dataset_epic_v952.csv.gz"
-ksalida  <- "semillerio" 
+ksalida  <- "semillerio_1430_1_E5078" 
 
 kcantidad_semillas  <- 200
 
