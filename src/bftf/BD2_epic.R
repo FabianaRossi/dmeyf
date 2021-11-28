@@ -654,7 +654,9 @@ if( palancas$tendencia6 )  Tendencia( dataset, cols_analiticas)
 if( palancas$antonio )  Antonio( cols_analiticas)
 
 if( palancas$canaritosimportancia )  CanaritosImportancia( dataset )
-
+if( palancas$canaritosimportancia )  CanaritosImportancia( dataset )
+if( palancas$canaritosimportancia )  CanaritosImportancia( dataset )
+if( palancas$canaritosimportancia )  CanaritosImportancia( dataset )
 
 
 #dejo la clase como ultimo campo
