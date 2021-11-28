@@ -17,11 +17,11 @@ kcantidad_semillas  <- 200
 #ATENCION
 #aqui deben ir los mejores valores que salieron de la optimizacion bayesiana
 x  <- list()
-x$gleaf_size   <-  
-x$gnum_leaves  <-  
-x$learning_rate <-  
-x$feature_fraction <-
-x$num_iterations  <- 
+x$gleaf_size   <-  49.94206903
+x$gnum_leaves  <-  0.075934592
+x$learning_rate <-  0.120859509
+x$feature_fraction <-0.332369928
+x$num_iterations  <- 456
 
 #------------------------------------------------------------------------------
 
