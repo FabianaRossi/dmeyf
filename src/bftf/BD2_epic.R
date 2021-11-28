@@ -28,7 +28,7 @@ palancas$variablesdrift  <- c()   #aqui van las columnas que se quieren eliminar
 
 palancas$corregir <-  FALSE    # TRUE o FALSE
 
-palancas$nuevasvars <-  FALSE  #si quiero hacer Feature Engineering manual
+palancas$nuevasvars <-  TRUE  #si quiero hacer Feature Engineering manual
 
 palancas$dummiesNA  <-  FALSE #La idea de Santiago Dellachiesa
 
@@ -59,7 +59,7 @@ palancas$ratiomean6  <- FALSE   #Un derivado de la idea de Daiana Sparta
 
 palancas$tendencia6  <- FALSE    #Great power comes with great responsability
 
-palancas$antonio  <- FALSE   # el valor de la variable sobre el promedio de ese mes
+palancas$fabi  <- TRUE   # el valor de la variable sobre el promedio de ese mes
 
 palancas$canaritosimportancia  <- TRUE  #si me quedo solo con lo mas importante de canaritosimportancia
 
@@ -237,46 +237,66 @@ AgregarVariables  <- function( dataset )
                                           Master_status)  ]
   
   
-  #combino MasterCard y Visa
-  dataset[ , mv_mfinanciacion_limite := rowSums( cbind( Master_mfinanciacion_limite,  Visa_mfinanciacion_limite) , na.rm=TRUE ) ]
+  # #combino MasterCard y Visa
+  # dataset[ , mv_mfinanciacion_limite := rowSums( cbind( Master_mfinanciacion_limite,  Visa_mfinanciacion_limite) , na.rm=TRUE ) ]
+  # 
+  # dataset[ , mv_Fvencimiento         := pmin( Master_Fvencimiento, Visa_Fvencimiento, na.rm = TRUE) ]
+  # dataset[ , mv_Finiciomora          := pmin( Master_Finiciomora, Visa_Finiciomora, na.rm = TRUE) ]
+  # dataset[ , mv_msaldototal          := rowSums( cbind( Master_msaldototal,  Visa_msaldototal) , na.rm=TRUE ) ]
+  # dataset[ , mv_msaldopesos          := rowSums( cbind( Master_msaldopesos,  Visa_msaldopesos) , na.rm=TRUE ) ]
+  # dataset[ , mv_msaldodolares        := rowSums( cbind( Master_msaldodolares,  Visa_msaldodolares) , na.rm=TRUE ) ]
+  # dataset[ , mv_mconsumospesos       := rowSums( cbind( Master_mconsumospesos,  Visa_mconsumospesos) , na.rm=TRUE ) ]
+  # dataset[ , mv_mconsumosdolares     := rowSums( cbind( Master_mconsumosdolares,  Visa_mconsumosdolares) , na.rm=TRUE ) ]
+  # dataset[ , mv_mlimitecompra        := rowSums( cbind( Master_mlimitecompra,  Visa_mlimitecompra) , na.rm=TRUE ) ]
+  # dataset[ , mv_madelantopesos       := rowSums( cbind( Master_madelantopesos,  Visa_madelantopesos) , na.rm=TRUE ) ]
+  # dataset[ , mv_madelantodolares     := rowSums( cbind( Master_madelantodolares,  Visa_madelantodolares) , na.rm=TRUE ) ]
+  # dataset[ , mv_fultimo_cierre       := pmax( Master_fultimo_cierre, Visa_fultimo_cierre, na.rm = TRUE) ]
+  # dataset[ , mv_mpagado              := rowSums( cbind( Master_mpagado,  Visa_mpagado) , na.rm=TRUE ) ]
+  # dataset[ , mv_mpagospesos          := rowSums( cbind( Master_mpagospesos,  Visa_mpagospesos) , na.rm=TRUE ) ]
+  # dataset[ , mv_mpagosdolares        := rowSums( cbind( Master_mpagosdolares,  Visa_mpagosdolares) , na.rm=TRUE ) ]
+  # dataset[ , mv_fechaalta            := pmax( Master_fechaalta, Visa_fechaalta, na.rm = TRUE) ]
+  # dataset[ , mv_mconsumototal        := rowSums( cbind( Master_mconsumototal,  Visa_mconsumototal) , na.rm=TRUE ) ]
+  # dataset[ , mv_cconsumos            := rowSums( cbind( Master_cconsumos,  Visa_cconsumos) , na.rm=TRUE ) ]
+  # dataset[ , mv_cadelantosefectivo   := rowSums( cbind( Master_cadelantosefectivo,  Visa_cadelantosefectivo) , na.rm=TRUE ) ]
+  # dataset[ , mv_mpagominimo          := rowSums( cbind( Master_mpagominimo,  Visa_mpagominimo) , na.rm=TRUE ) ]
+  # 
+  # #a partir de aqui juego con la suma de Mastercard y Visa
+  # dataset[ , mvr_Master_mlimitecompra:= Master_mlimitecompra / mv_mlimitecompra ]
+  # dataset[ , mvr_Visa_mlimitecompra  := Visa_mlimitecompra / mv_mlimitecompra ]
+  # dataset[ , mvr_msaldototal         := mv_msaldototal / mv_mlimitecompra ]
+  # dataset[ , mvr_msaldopesos         := mv_msaldopesos / mv_mlimitecompra ]
+  # dataset[ , mvr_msaldopesos2        := mv_msaldopesos / mv_msaldototal ]
+  # dataset[ , mvr_msaldodolares       := mv_msaldodolares / mv_mlimitecompra ]
+  # dataset[ , mvr_msaldodolares2      := mv_msaldodolares / mv_msaldototal ]
+  # dataset[ , mvr_mconsumospesos      := mv_mconsumospesos / mv_mlimitecompra ]
+  # dataset[ , mvr_mconsumosdolares    := mv_mconsumosdolares / mv_mlimitecompra ]
+  # dataset[ , mvr_madelantopesos      := mv_madelantopesos / mv_mlimitecompra ]
+  # dataset[ , mvr_madelantodolares    := mv_madelantodolares / mv_mlimitecompra ]
+  # dataset[ , mvr_mpagado             := mv_mpagado / mv_mlimitecompra ]
+  # dataset[ , mvr_mpagospesos         := mv_mpagospesos / mv_mlimitecompra ]
+  # dataset[ , mvr_mpagosdolares       := mv_mpagosdolares / mv_mlimitecompra ]
+  # dataset[ , mvr_mconsumototal       := mv_mconsumototal  / mv_mlimitecompra ]
+  # dataset[ , mvr_mpagominimo         := mv_mpagominimo  / mv_mlimitecompra ]
+  # 
   
-  dataset[ , mv_Fvencimiento         := pmin( Master_Fvencimiento, Visa_Fvencimiento, na.rm = TRUE) ]
-  dataset[ , mv_Finiciomora          := pmin( Master_Finiciomora, Visa_Finiciomora, na.rm = TRUE) ]
-  dataset[ , mv_msaldototal          := rowSums( cbind( Master_msaldototal,  Visa_msaldototal) , na.rm=TRUE ) ]
-  dataset[ , mv_msaldopesos          := rowSums( cbind( Master_msaldopesos,  Visa_msaldopesos) , na.rm=TRUE ) ]
-  dataset[ , mv_msaldodolares        := rowSums( cbind( Master_msaldodolares,  Visa_msaldodolares) , na.rm=TRUE ) ]
-  dataset[ , mv_mconsumospesos       := rowSums( cbind( Master_mconsumospesos,  Visa_mconsumospesos) , na.rm=TRUE ) ]
-  dataset[ , mv_mconsumosdolares     := rowSums( cbind( Master_mconsumosdolares,  Visa_mconsumosdolares) , na.rm=TRUE ) ]
-  dataset[ , mv_mlimitecompra        := rowSums( cbind( Master_mlimitecompra,  Visa_mlimitecompra) , na.rm=TRUE ) ]
-  dataset[ , mv_madelantopesos       := rowSums( cbind( Master_madelantopesos,  Visa_madelantopesos) , na.rm=TRUE ) ]
-  dataset[ , mv_madelantodolares     := rowSums( cbind( Master_madelantodolares,  Visa_madelantodolares) , na.rm=TRUE ) ]
-  dataset[ , mv_fultimo_cierre       := pmax( Master_fultimo_cierre, Visa_fultimo_cierre, na.rm = TRUE) ]
-  dataset[ , mv_mpagado              := rowSums( cbind( Master_mpagado,  Visa_mpagado) , na.rm=TRUE ) ]
-  dataset[ , mv_mpagospesos          := rowSums( cbind( Master_mpagospesos,  Visa_mpagospesos) , na.rm=TRUE ) ]
-  dataset[ , mv_mpagosdolares        := rowSums( cbind( Master_mpagosdolares,  Visa_mpagosdolares) , na.rm=TRUE ) ]
-  dataset[ , mv_fechaalta            := pmax( Master_fechaalta, Visa_fechaalta, na.rm = TRUE) ]
-  dataset[ , mv_mconsumototal        := rowSums( cbind( Master_mconsumototal,  Visa_mconsumototal) , na.rm=TRUE ) ]
-  dataset[ , mv_cconsumos            := rowSums( cbind( Master_cconsumos,  Visa_cconsumos) , na.rm=TRUE ) ]
-  dataset[ , mv_cadelantosefectivo   := rowSums( cbind( Master_cadelantosefectivo,  Visa_cadelantosefectivo) , na.rm=TRUE ) ]
-  dataset[ , mv_mpagominimo          := rowSums( cbind( Master_mpagominimo,  Visa_mpagominimo) , na.rm=TRUE ) ]
   
-  #a partir de aqui juego con la suma de Mastercard y Visa
-  dataset[ , mvr_Master_mlimitecompra:= Master_mlimitecompra / mv_mlimitecompra ]
-  dataset[ , mvr_Visa_mlimitecompra  := Visa_mlimitecompra / mv_mlimitecompra ]
-  dataset[ , mvr_msaldototal         := mv_msaldototal / mv_mlimitecompra ]
-  dataset[ , mvr_msaldopesos         := mv_msaldopesos / mv_mlimitecompra ]
-  dataset[ , mvr_msaldopesos2        := mv_msaldopesos / mv_msaldototal ]
-  dataset[ , mvr_msaldodolares       := mv_msaldodolares / mv_mlimitecompra ]
-  dataset[ , mvr_msaldodolares2      := mv_msaldodolares / mv_msaldototal ]
-  dataset[ , mvr_mconsumospesos      := mv_mconsumospesos / mv_mlimitecompra ]
-  dataset[ , mvr_mconsumosdolares    := mv_mconsumosdolares / mv_mlimitecompra ]
-  dataset[ , mvr_madelantopesos      := mv_madelantopesos / mv_mlimitecompra ]
-  dataset[ , mvr_madelantodolares    := mv_madelantodolares / mv_mlimitecompra ]
-  dataset[ , mvr_mpagado             := mv_mpagado / mv_mlimitecompra ]
-  dataset[ , mvr_mpagospesos         := mv_mpagospesos / mv_mlimitecompra ]
-  dataset[ , mvr_mpagosdolares       := mv_mpagosdolares / mv_mlimitecompra ]
-  dataset[ , mvr_mconsumototal       := mv_mconsumototal  / mv_mlimitecompra ]
-  dataset[ , mvr_mpagominimo         := mv_mpagominimo  / mv_mlimitecompra ]
+  dataset[ , mv_edad:= ctrx_quarter / cliente_edad ]
+  dataset[ , mcc_visa:= mcuenta_corriente / mtarjeta_visa_consumo ]
+  dataset[ , cp_mov:= cproductos / ctrx_quarter ]
+  dataset[ , edad_ahorro:= cliente_edad / mcaja_ahorro ]
+  dataset[ , visaa_mant:= mtarjeta_visa_consumo / mcomisiones_mantenimiento ]
+  dataset[ , actm_visa:= mactivos_margen / mtarjeta_visa_consumo ]
+  dataset[ , cp_proll:= cproductos /mpayroll ]
+  dataset[ , mcc_mov:= mcuenta_corriente / ctrx_quarter ]
+  dataset[ , rent_mant:= mrentabilidad_annual / mcomisiones_mantenimiento ]
+  dataset[ , pr_mant:= mpayroll / mcomisiones_mantenimiento ]
+  dataset[ , edad_visa:= cliente_edad / mtarjeta_visa_consumo ]
+  dataset[ , deuda:= (mprestamos_personales + mprestamos_hipotecarios) / mpayroll ]
+  dataset[ , porc_com:= mpayroll / mcomisiones_mantenimiento ]
+  
+  
+  
+  
   
   #Aqui debe usted agregar sus propias nuevas variables
   
@@ -500,18 +520,21 @@ Tendencia  <- function( dataset, cols )
   
 }
 #------------------------------------------------------------------------------
-#Esta palanca fue solicitada por  Antonio Velazquez Bustamente
+
 #agregar una palanca al script 951 que genere el valor de la variable/(el promedio de la misma de todos los clientes para el mes en cuestión)
 
-Antonio  <- function( cols )
+Fabi  <- function( cols )
 {
   
-  sufijo  <- paste0( "_tony")
+  sufijo  <- paste0( "_fabi")
   
-  dataset[ , paste0( cols, sufijo) := lapply( .SD,  function(x){ x/mean(x, na.rm=TRUE)} ), 
-           by= foto_mes, 
+  dataset[ , paste0( cols, sufijo) := lapply( .SD,  function(x){ x/max(x, na.rm=TRUE)} ), 
+           by= numero_de_cliente, 
            .SDcols= cols]
   
+  cols_fabi0 <- colnames(dataset)[dataset[,grepl( "_fabi" , names( dataset ) )]]
+  cols_fabi <- setdiff( cols_fabi0, c("mcaja_ahorro_fabi","mpayroll_fabi" ) )
+  dataset[  , c(cols_fabi) := NULL ]
   ReportarCampos( dataset )
 }
 #------------------------------------------------------------------------------
@@ -651,7 +674,7 @@ if(palancas$ratiomean6) RatioMean( dataset, cols_analiticas, 6) #Derivado de la 
 
 if( palancas$tendencia6 )  Tendencia( dataset, cols_analiticas)
 
-if( palancas$antonio )  Antonio( cols_analiticas)
+if( palancas$fabi )  Fabi( cols_analiticas)
 
 if( palancas$canaritosimportancia )  CanaritosImportancia( dataset )
 if( palancas$canaritosimportancia )  CanaritosImportancia( dataset )
