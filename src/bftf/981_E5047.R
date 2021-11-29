@@ -97,7 +97,7 @@ gc()              #garbage collection
 
 
 #Estos son los parametros que estan fijos 
-param_basicos  <- listlist( objective= "binary",
+param_basicos  <- list( objective= "binary",
                             metric= "custom",
                             first_metric_only= TRUE,
                             boost_from_average= TRUE,

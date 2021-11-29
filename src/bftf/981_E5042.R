@@ -121,7 +121,8 @@ param_ganadores  <- list( "learning_rate"= 0.039591215,
                           "min_data_in_leaf"= 203,
                           "num_leaves"= 322,
                           "num_iterations"=27,
-                          "bagging_fraction"= 0.70989007
+                          "bagging_fraction"= 0.70989007,
+                          "ratio_corte"=0.035035525
                         )
 
 #junto ambas listas de parametros en una sola
