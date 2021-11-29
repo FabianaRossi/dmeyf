@@ -9,7 +9,7 @@ gc()             #garbage collection
 setwd( "~/buckets/b1/" )
 
 #leo el dataset , aqui se puede usar algun super dataset con Feature Engineering
-dataset  <- fread( "datasets/dataset_epic_v963.csv.gz", stringsAsFactors= TRUE)
+dataset  <- fread( "datasetsOri/paquete_premium.csv.gz", stringsAsFactors= TRUE)
 gc()
 
 #achico el dataset
@@ -59,10 +59,10 @@ while(  h>0  &  !( distintos >=6 & distintos <=7 ) )
 {
   h <- h - 1 
   rf.cluster  <- cutree( hclust.rf, h)
-
+  
   dataset[  , cluster2 := NULL ]
   dataset[  , cluster2 := rf.cluster ]
-
+  
   distintos  <- nrow( dataset[  , .N,  cluster2 ] )
   cat( distintos, " " )
 }
@@ -74,5 +74,3 @@ dataset[  , .N,  cluster2 ]  #tamaño de los clusters
 
 #ahora a mano veo las variables
 dataset[  , mean(ctrx_quarter),  cluster2 ]  #media de la variable  ctrx_quarter
-
-
