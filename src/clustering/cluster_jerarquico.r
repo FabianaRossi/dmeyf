@@ -9,7 +9,7 @@ gc()             #garbage collection
 setwd( "~/buckets/b1/" )
 
 #leo el dataset , aqui se puede usar algun super dataset con Feature Engineering
-dataset  <- fread( "datasetsOri/paquete_premium.csv.gz", stringsAsFactors= TRUE)
+dataset  <- fread( "datasets/dataset_epic_v963.csv.gz", stringsAsFactors= TRUE)
 gc()
 
 #achico el dataset
