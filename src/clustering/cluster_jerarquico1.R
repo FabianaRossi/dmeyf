@@ -120,9 +120,9 @@ gc()
 
 #j <- strsplit(vector_de_colnames, "\\s")[[1]]
 #quito los nulos para que se pueda ejecutar randomForest,  Dios que algoritmo prehistorico ...
+dataset[ , which(sapply(dataset, anyNA)) := NULL]
 dataset  <- na.roughfix( dataset )
 gc()
-
 
 campos_buenos  <- c( "ctrx_quarter", "cpayroll_trx", "mcaja_ahorro", "mtarjeta_visa_consumo", "ctarjeta_visa_transacciones",
                      "mcuentas_saldo", "mrentabilidad_annual", "mprestamos_personales", "mactivos_margen", "mpayroll",
