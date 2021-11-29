@@ -466,6 +466,9 @@ Visa_mpagospesos_max6_lag2_lag3_lag4_lag5_delta6_avg6_avg3
 Visa_msaldototal_avg3
 mpasivos_margen_delta1_lag4_avg3
 mcuenta_corriente_tend6_avg6_avg3
+clase_ternaria
+numero_de_cliente
+foto_mes
 "
 j <- strsplit(vector, "\\s")[[1]]
 
