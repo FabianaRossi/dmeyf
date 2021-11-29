@@ -100,18 +100,15 @@ gc()              #garbage collection
 param_basicos  <- list( objective= "binary",
                         metric= "custom",
                         first_metric_only= TRUE,
-                        boosting_type="rf",
+                        boosting_type = "rf",
                         boost_from_average= TRUE,
                         feature_pre_filter= FALSE,
+                        verbosity= -100,
+                        seed= 140909,
                         max_depth=  -1,         # -1 significa no limitar,  por ahora lo dejo fijo
                         min_gain_to_split= 0.0, #por ahora, lo dejo fijo
-                        lambda_l1= 0.0,         #por ahora, lo dejo fijo
-                        lambda_l2= 0.0,         #por ahora, lo dejo fijo
-                        max_bin= 31,            #por ahora, lo dejo fijo
-                        force_row_wise= TRUE,
-                        seed=140909,
-                        
-                        extra_trees=TRUE,
+                        force_row_wise= TRUE,  
+                        extra_trees= TRUE,
                         bagging_freq=10#para que los alumnos no se atemoricen con tantos warning
                        )
 
