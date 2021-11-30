@@ -10,7 +10,7 @@ require("primes")
 setwd("~/buckets/b1/")
 
 karch_dataset  <- "./datasets/canaproxy_vidapropia_03_final.csv.gz"
-ksalida  <- "1430_S" 
+ksalida  <- "1430_S1" 
 
 kcantidad_semillas  <- 200
 
